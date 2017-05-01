@@ -1,4 +1,5 @@
 var express = require('express');
+var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var handler = require('./lib/request-handler');
 // Seed the database
@@ -7,6 +8,7 @@ seedDb();
 
 var app = express();
 
+app.use(morgan('short'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
