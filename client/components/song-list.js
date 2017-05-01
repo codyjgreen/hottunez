@@ -6,7 +6,9 @@ const SongList = ({ songs }) => {
     <ul>
       { songs.map(song => {
           return (
-            <SongListEntry song={song} />
+            <SongListEntry
+              key={song._id}
+              song={song} />
           );
         })
       }
