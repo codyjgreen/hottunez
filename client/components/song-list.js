@@ -1,10 +1,12 @@
 import React from 'react';
 import SongListEntry from './song-list-entry';
 
-const SongList = ({ onClick, songs }) => {
+const SongList = ({ children, onClick, songs}) => {
   return (
-    <ul>
-      { songs.map(song => {
+    <div>
+      <h2>{ children }</h2>
+      <ul>
+        { songs.map(song => {
           return (
             <SongListEntry
               key={song._id}
@@ -14,6 +16,7 @@ const SongList = ({ onClick, songs }) => {
         })
       }
     </ul>
+    </div>
   );
 };
 
