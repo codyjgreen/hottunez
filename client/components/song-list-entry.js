@@ -1,10 +1,14 @@
 import React from 'react';
 
-const SongListEntry = ({ onClick, song }) => {
+const SongListEntry = ({ onPlayClick, song, num }) => {
   return (
-    <li onClick={() => onClick(song)}>
-      { `${song.artist} - ${song.title}` }
-    </li>
+    <tr>
+      <td>{num}</td>
+      <td>{song.artist}</td>
+      <td>{song.album}</td>
+      <td>{song.title}</td>
+      <td onClick={() => onPlayClick(song)}>Play</td>
+    </tr>
   );
 };
 

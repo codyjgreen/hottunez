@@ -34,9 +34,9 @@ class App extends Component {
         <h1>hotTUNEZ</h1>
         <AudioPlayer song={this.state.currentSong} />
         <SongList
-          onClick={this.onSongClick}
+          onPlayClick={this.onSongClick}
           songs={this.state.songs}>
-          All Songs
+          Library
         </SongList>
       </div>
     );
