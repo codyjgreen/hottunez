@@ -7,6 +7,8 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    this.onSongClick = this.onSongClick.bind(this);
+
     this.state = {
       songs: [],
       currentSong: {}
@@ -22,11 +24,17 @@ class App extends Component {
       });
   }
 
+  onSongClick(song) {
+    this.setState({ currentSong: song });
+  }
+
   render() {
     return (
       <div>
         <AudioPlayer song={this.state.currentSong} />
-        <SongList songs={this.state.songs} />
+        <SongList
+          onClick={this.onSongClick}
+          songs={this.state.songs} />
       </div>
     );
   }

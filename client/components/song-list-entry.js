@@ -1,8 +1,8 @@
 import React from 'react';
 
-const SongListEntry = ({ song }) => {
+const SongListEntry = ({ onClick, song }) => {
   return (
-    <li>
+    <li onClick={() => onClick(song)}>
       { `${song.artist} - ${song.title}` }
     </li>
   );
