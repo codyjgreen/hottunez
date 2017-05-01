@@ -18,6 +18,9 @@ app.post('/api/songs', handler.createSong);
 app.get('/api/songs/:id', handler.fetchSong);
 app.put('/api/songs/:id', handler.updateSong);
 app.delete('/api/songs/:id', handler.deleteSong);
+
+app.get('/api/playlists', handler.fetchPlaylists);
+
 app.get('/*', handler.render404);
 
 module.exports = app;
