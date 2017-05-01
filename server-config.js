@@ -13,7 +13,6 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/', handler.renderIndex);
 app.get('/api/songs', handler.fetchSongs);
 app.post('/api/songs', handler.createSong);
 app.get('/api/songs/:id', handler.fetchSong);
