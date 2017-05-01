@@ -1,6 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var handler = require('./lib/request-handler');
+// Seed the database
+var seedDb = require('./seedDb');
+seedDb();
 
 var app = express();
 
