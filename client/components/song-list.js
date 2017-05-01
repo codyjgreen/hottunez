@@ -1,13 +1,12 @@
 import React from 'react';
+import SongListEntry from './song-list-entry';
 
 const SongList = ({ songs }) => {
   return (
     <ul>
       { songs.map(song => {
           return (
-            <li>
-              { `${song.artist} - ${song.title}` }
-            </li>
+            <SongListEntry song={song} />
           );
         })
       }
@@ -15,4 +14,4 @@ const SongList = ({ songs }) => {
   );
 };
 
-module.exports = SongList;
+export default SongList;
