@@ -3,9 +3,14 @@ import React from 'react';
 const SongList = ({ songs }) => {
   return (
     <ul>
-      <li>A</li>
-      <li>B</li>
-      <li>C</li>
+      { songs.map(song => {
+          return (
+            <li>
+              { `${song.artist} - ${song.title}` }
+            </li>
+          );
+        })
+      }
     </ul>
   );
 };
