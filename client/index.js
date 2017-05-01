@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import SongList from './components/song-list';
 
 class App extends Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        Hello world!
+        <SongList />
       </div>
     );
   }
