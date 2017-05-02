@@ -20,6 +20,8 @@ app.put('/api/songs/:id', handler.updateSong);
 app.delete('/api/songs/:id', handler.deleteSong);
 
 app.get('/api/playlists', handler.fetchPlaylists);
+app.post('/api/playlists', handler.createPlaylist);
+app.put('/api/playlists/:id', handler.updatePlaylist);
 
 app.get('/*', handler.render404);
 

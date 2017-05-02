@@ -5,7 +5,12 @@ var songSchema = mongoose.model('Song').schema;
 var playlistSchema = new mongoose.Schema(
   {
     name: String,
-    songs: [songSchema]
+    songs: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Song'
+      }
+    ]
   },
   {
     timestamps: true

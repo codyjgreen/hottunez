@@ -1,5 +1,6 @@
 var db = require('./app/config');
 var Song = require('./models/song');
+var Playlist = require('./models/playlist');
 
 var data = [
   {
@@ -29,6 +30,14 @@ var data = [
 ];
 
 var seedDb = function() {
+  Playlist.remove()
+    .catch(function(err) {
+      console.log(err);
+    })
+    .then(function() {
+      console.log('All playlists removed');
+    });
+
   Song.remove()
     .catch(function(err) {
       console.log(err);
