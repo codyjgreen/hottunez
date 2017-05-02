@@ -112,7 +112,9 @@ class App extends Component {
         name: name,
         songs: []
       })
-    }).then(() => fetch('http://localhost:8080/api/playlists'))
+    }).then(res => res.json())
+      .then(playlist => this.setState({ currentPlaylist: playlist }))
+      .then(() => fetch('http://localhost:8080/api/playlists'))
       .then(res => res.json())
       .then(res => this.setState({ playlists: res.results }));
   }
