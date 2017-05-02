@@ -18,6 +18,7 @@ class App extends Component {
     this.onPlaylistAdd = this.onPlaylistAdd.bind(this);
     this.onSongEnd = this.onSongEnd.bind(this);
     this.onAutoplayClick = this.onAutoplayClick.bind(this);
+    this.onShuffleClick = this.onShuffleClick.bind(this);
 
     this.state = {
       songs: [],
@@ -25,7 +26,8 @@ class App extends Component {
       playlists: [],
       currentPlaylist: {songs: []},
       isPlaylistSaved: true,
-      isAutoplay: true
+      isAutoplay: true,
+      isShuffle: false
     };
   }
 
@@ -127,9 +129,19 @@ class App extends Component {
       const songId = this.state.currentSong._id;
       const songIds = this.state.currentPlaylist.songs.map(song => song._id);
       const currentPlaylist = this.state.currentPlaylist;
-      if (songIds.indexOf(songId) + 1 < currentPlaylist.songs.length) {
+      if (!this.state.isShuffle) {
+        if (songIds.indexOf(songId) + 1 < currentPlaylist.songs.length) {
+          this.setState({
+            currentSong: currentPlaylist.songs[songIds.indexOf(songId) + 1]
+          });
+        }
+      } else {
+        let randomIndex = Math.floor(Math.random() * currentPlaylist.songs.length);
+        while (songIds.indexOf(songId) === randomIndex) {
+          randomIndex = Math.floor(Math.random() * currentPlaylist.songs.length);
+        }
         this.setState({
-          currentSong: currentPlaylist.songs[songIds.indexOf(songId) + 1]
+          currentSong: currentPlaylist.songs[randomIndex]
         });
       }
     }
@@ -137,6 +149,10 @@ class App extends Component {
 
   onAutoplayClick() {
     this.setState({ isAutoplay: !this.state.isAutoplay });
+  }
+
+  onShuffleClick() {
+    this.setState({ isShuffle: !this.state.isShuffle });
   }
 
   render() {
@@ -155,10 +171,12 @@ class App extends Component {
           onDeleteClick={this.onDeleteClick}
           onPlaylistAdd={this.onPlaylistAdd}
           onAutoplayClick={this.onAutoplayClick}
+          onShuffleClick={this.onShuffleClick}
           playlists={this.state.playlists}
           currentPlaylist={this.state.currentPlaylist}
           isPlaylistSaved={this.state.isPlaylistSaved}
           isAutoplay={this.state.isAutoplay}
+          isShuffle={this.state.isShuffle}
           currentSong={this.state.currentSong}>
           Playlists
         </Playlists>

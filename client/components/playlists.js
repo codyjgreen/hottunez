@@ -12,6 +12,8 @@ const Playlists = ({
     onPlaylistClick,
     onAutoplayClick,
     isPlaylistSaved,
+    isShuffle,
+    onShuffleClick,
     onSaveClick,
     onDeleteClick,
     onPlaylistAdd,
@@ -43,9 +45,16 @@ const Playlists = ({
 
       <Checkbox
         style="checkbox-inline"
-        isAutoplay={isAutoplay}
+        checked={isAutoplay}
         handleParentChange={onAutoplayClick}>
         Autoplay
+      </Checkbox>
+
+      <Checkbox
+        style="checkbox-inline"
+        checked={isShuffle}
+        handleParentChange={onShuffleClick}>
+        Shuffle
       </Checkbox>
 
       <Playlist

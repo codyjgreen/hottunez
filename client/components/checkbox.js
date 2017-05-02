@@ -6,7 +6,7 @@ class Checkbox extends Component {
 
     this.handleChange = this.handleChange.bind(this);
 
-    this.state = { checked: this.props.isAutoplay };
+    this.state = { checked: this.props.checked };
   }
 
   handleChange(event) {
