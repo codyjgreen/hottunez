@@ -10,6 +10,7 @@ class App extends Component {
 
     this.onSongClick = this.onSongClick.bind(this);
     this.onRemoveClick = this.onRemoveClick.bind(this);
+    this.onPlaylistClick = this.onPlaylistClick.bind(this);
 
     this.state = {
       songs: [],
@@ -46,6 +47,10 @@ class App extends Component {
     });
   }
 
+  onPlaylistClick(playlist) {
+    this.setState({ currentPlaylist: playlist.songs });
+  }
+
   render() {
     return (
       <div>
@@ -54,6 +59,7 @@ class App extends Component {
         <Playlists
           onPlayClick={this.onSongClick}
           onRemoveClick={this.onRemoveClick}
+          onPlaylistClick={this.onPlaylistClick}
           playlists={this.state.playlists}
           currentPlaylist={this.state.currentPlaylist}>
           Playlists
