@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import AudioPlayer from './components/audio-player';
+import Playlists from './components/playlists';
 import SongList from './components/song-list';
 
 class App extends Component {
@@ -11,7 +12,9 @@ class App extends Component {
 
     this.state = {
       songs: [],
-      currentSong: {}
+      currentSong: {},
+      playlists: [],
+      currentPlaylist: {}
     };
   }
 
@@ -21,6 +24,12 @@ class App extends Component {
       .then(res => {
         this.setState({ songs: res.results });
         this.setState({ currentSong: this.state.songs[0] });
+      });
+
+    fetch('http://localhost:8080/api/playlists')
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ playlists: res.results });
       });
   }
 
@@ -33,6 +42,9 @@ class App extends Component {
       <div>
         <h1>hotTUNEZ</h1>
         <AudioPlayer song={this.state.currentSong} />
+        <Playlists playlists={this.state.playlists}>
+          Playlists
+        </Playlists>
         <SongList
           onPlayClick={this.onSongClick}
           songs={this.state.songs}>
