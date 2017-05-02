@@ -3,7 +3,7 @@ import React from 'react';
 const SongStatus = ({ song }) => {
   if (Object.keys(song).length === 0) {
     return (
-      <h2>Loading...</h2>
+      <h2>Choose a hot song</h2>
     );
   }
 

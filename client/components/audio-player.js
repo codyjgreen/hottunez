@@ -2,7 +2,7 @@ import React from 'react';
 
 const AudioPlayer = ({ song }) => {
   return (
-    <audio controls src={song.url} />
+    <audio controls autoPlay src={song.url ? song.url : ''} />
   );
 };
 

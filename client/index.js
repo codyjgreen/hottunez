@@ -29,7 +29,7 @@ class App extends Component {
       .then(res => res.json())
       .then(res => {
         this.setState({ songs: res.results });
-        this.setState({ currentSong: this.state.songs[0] });
+        // this.setState({ currentSong: this.state.songs[0] });
       });
 
     fetch('http://localhost:8080/api/playlists')
