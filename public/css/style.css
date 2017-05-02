@@ -16,3 +16,7 @@ body {
   font-weight: bold;
   color: green;
 }
+
+audio {
+  width: 400px;
+}

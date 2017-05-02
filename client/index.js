@@ -16,6 +16,7 @@ class App extends Component {
     this.onSaveClick = this.onSaveClick.bind(this);
     this.onDeleteClick = this.onDeleteClick.bind(this);
     this.onPlaylistAdd = this.onPlaylistAdd.bind(this);
+    this.onSongEnd = this.onSongEnd.bind(this);
 
     this.state = {
       songs: [],
@@ -119,12 +120,25 @@ class App extends Component {
       .then(res => this.setState({ playlists: res.results }));
   }
 
+  onSongEnd() {
+    const songId = this.state.currentSong._id;
+    const songIds = this.state.currentPlaylist.songs.map(song => song._id);
+    const currentPlaylist = this.state.currentPlaylist;
+    if (songIds.indexOf(songId) + 1 < currentPlaylist.songs.length) {
+      this.setState({
+        currentSong: currentPlaylist.songs[songIds.indexOf(songId) + 1]
+      });
+    }
+  }
+
   render() {
     return (
       <div>
         <h1>hotTUNEZ</h1>
         <SongStatus song={this.state.currentSong} />
-        <AudioPlayer song={this.state.currentSong} />
+        <AudioPlayer
+          song={this.state.currentSong}
+          onSongEnd={this.onSongEnd} />
         <Playlists
           onPlayClick={this.onSongClick}
           onRemoveClick={this.onRemoveClick}
