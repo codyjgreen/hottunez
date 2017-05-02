@@ -6,3 +6,8 @@ html, body {
 body {
   background-color: #ccc;
 }
+
+.selected-playlist {
+  font-weight: bold;
+  color: blue;
+}

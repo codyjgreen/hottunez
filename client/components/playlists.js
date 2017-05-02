@@ -20,9 +20,15 @@ const Playlists = ({
       <CreatePlaylist onPlaylistAdd={onPlaylistAdd} />
       <ul>
         { playlists.map(playlist => {
+            let cssClasses = '';
+            if (playlist._id === currentPlaylist._id) {
+              cssClasses = 'selected-playlist';
+            }
+
             return (
               <li
                 key={playlist._id}
+                className={cssClasses}
                 onClick={() => onPlaylistClick(playlist)}>
                 {playlist.name}
               </li>
