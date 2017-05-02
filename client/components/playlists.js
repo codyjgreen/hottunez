@@ -1,6 +1,7 @@
 import React from 'react';
 import Playlist from './playlist';
 import CreatePlaylist from './create-playlist';
+import Checkbox from './checkbox';
 
 const Playlists = ({
     children,
@@ -9,10 +10,12 @@ const Playlists = ({
     onPlayClick,
     onRemoveClick,
     onPlaylistClick,
+    onAutoplayClick,
     isPlaylistSaved,
     onSaveClick,
     onDeleteClick,
     onPlaylistAdd,
+    isAutoplay,
     currentSong
 }) => {
   return (
@@ -37,6 +40,14 @@ const Playlists = ({
           })
         }
       </ul>
+
+      <Checkbox
+        style="checkbox-inline"
+        isAutoplay={isAutoplay}
+        handleParentChange={onAutoplayClick}>
+        Autoplay
+      </Checkbox>
+
       <Playlist
         onPlayClick={onPlayClick}
         onRemoveClick={onRemoveClick}

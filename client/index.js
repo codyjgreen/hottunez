@@ -17,13 +17,15 @@ class App extends Component {
     this.onDeleteClick = this.onDeleteClick.bind(this);
     this.onPlaylistAdd = this.onPlaylistAdd.bind(this);
     this.onSongEnd = this.onSongEnd.bind(this);
+    this.onAutoplayClick = this.onAutoplayClick.bind(this);
 
     this.state = {
       songs: [],
       currentSong: {},
       playlists: [],
       currentPlaylist: {songs: []},
-      isPlaylistSaved: true
+      isPlaylistSaved: true,
+      isAutoplay: true
     };
   }
 
@@ -121,14 +123,20 @@ class App extends Component {
   }
 
   onSongEnd() {
-    const songId = this.state.currentSong._id;
-    const songIds = this.state.currentPlaylist.songs.map(song => song._id);
-    const currentPlaylist = this.state.currentPlaylist;
-    if (songIds.indexOf(songId) + 1 < currentPlaylist.songs.length) {
-      this.setState({
-        currentSong: currentPlaylist.songs[songIds.indexOf(songId) + 1]
-      });
+    if (this.state.isAutoplay) {
+      const songId = this.state.currentSong._id;
+      const songIds = this.state.currentPlaylist.songs.map(song => song._id);
+      const currentPlaylist = this.state.currentPlaylist;
+      if (songIds.indexOf(songId) + 1 < currentPlaylist.songs.length) {
+        this.setState({
+          currentSong: currentPlaylist.songs[songIds.indexOf(songId) + 1]
+        });
+      }
     }
+  }
+
+  onAutoplayClick() {
+    this.setState({ isAutoplay: !this.state.isAutoplay });
   }
 
   render() {
@@ -146,9 +154,11 @@ class App extends Component {
           onSaveClick={this.onSaveClick}
           onDeleteClick={this.onDeleteClick}
           onPlaylistAdd={this.onPlaylistAdd}
+          onAutoplayClick={this.onAutoplayClick}
           playlists={this.state.playlists}
           currentPlaylist={this.state.currentPlaylist}
           isPlaylistSaved={this.state.isPlaylistSaved}
+          isAutoplay={this.state.isAutoplay}
           currentSong={this.state.currentSong}>
           Playlists
         </Playlists>
