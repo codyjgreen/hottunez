@@ -14,6 +14,7 @@ class App extends Component {
     this.onPlaylistClick = this.onPlaylistClick.bind(this);
     this.onAddClick = this.onAddClick.bind(this);
     this.onSaveClick = this.onSaveClick.bind(this);
+    this.onDeleteClick = this.onDeleteClick.bind(this);
 
     this.state = {
       songs: [],
@@ -84,6 +85,17 @@ class App extends Component {
       .then(res => this.setState({ playlists: res.results }));
   }
 
+  onDeleteClick(playlist) {
+    fetch(`http://localhost:8080/api/playlists/${playlist._id}`, {
+      method: 'DELETE'
+    }).then(() => fetch('http://localhost:8080/api/playlists'))
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ playlists: res.results });
+        this.setState({ currentPlaylist: {songs: []} });
+      });
+  }
+
   render() {
     return (
       <div>
@@ -95,6 +107,7 @@ class App extends Component {
           onRemoveClick={this.onRemoveClick}
           onPlaylistClick={this.onPlaylistClick}
           onSaveClick={this.onSaveClick}
+          onDeleteClick={this.onDeleteClick}
           playlists={this.state.playlists}
           currentPlaylist={this.state.currentPlaylist}
           isPlaylistSaved={this.state.isPlaylistSaved}>
