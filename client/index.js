@@ -17,7 +17,8 @@ class App extends Component {
       songs: [],
       currentSong: {},
       playlists: [],
-      currentPlaylist: []
+      currentPlaylist: [],
+      isPlaylistSaved: true
     };
   }
 
@@ -44,12 +45,16 @@ class App extends Component {
   onRemoveClick(songToBeRemoved) {
     const newPlaylist = this.state.currentPlaylist.filter(song => song !== songToBeRemoved);
     this.setState({
-      currentPlaylist: newPlaylist
+      currentPlaylist: newPlaylist,
+      isPlaylistSaved: false
     });
   }
 
   onPlaylistClick(playlist) {
-    this.setState({ currentPlaylist: playlist.songs });
+    this.setState({
+      currentPlaylist: playlist.songs,
+      isPlaylistSaved: true
+    });
   }
 
   onAddClick(song) {
@@ -57,7 +62,8 @@ class App extends Component {
     if (songIds.indexOf(song._id) === -1) {
       const newPlaylist = [...this.state.currentPlaylist, song];
       this.setState({
-        currentPlaylist: newPlaylist
+        currentPlaylist: newPlaylist,
+        isPlaylistSaved: false
       });
     }
   }
@@ -72,7 +78,8 @@ class App extends Component {
           onRemoveClick={this.onRemoveClick}
           onPlaylistClick={this.onPlaylistClick}
           playlists={this.state.playlists}
-          currentPlaylist={this.state.currentPlaylist}>
+          currentPlaylist={this.state.currentPlaylist}
+          isPlaylistSaved={this.state.isPlaylistSaved}>
           Playlists
         </Playlists>
         <SongList
