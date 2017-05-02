@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import AudioPlayer from './components/audio-player';
 import Playlists from './components/playlists';
 import SongList from './components/song-list';
+import SongStatus from './components/song-status';
 
 class App extends Component {
   constructor(props) {
@@ -87,6 +88,7 @@ class App extends Component {
     return (
       <div>
         <h1>hotTUNEZ</h1>
+        <SongStatus song={this.state.currentSong} />
         <AudioPlayer song={this.state.currentSong} />
         <Playlists
           onPlayClick={this.onSongClick}
