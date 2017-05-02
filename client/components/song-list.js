@@ -1,7 +1,7 @@
 import React from 'react';
 import SongListEntry from './song-list-entry';
 
-const SongList = ({ children, onPlayClick, songs}) => {
+const SongList = ({ children, onPlayClick, onAddClick, songs}) => {
   return (
     <div>
       <h2>{ children }</h2>
@@ -18,6 +18,7 @@ const SongList = ({ children, onPlayClick, songs}) => {
                 <SongListEntry
                   key={song._id}
                   onPlayClick={onPlayClick}
+                  onAddClick={onAddClick}
                   num={i + 1}
                   song={song} />
               );

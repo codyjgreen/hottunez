@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SongListEntry = ({ onPlayClick, song, num }) => {
+const SongListEntry = ({ onPlayClick, onAddClick, song, num }) => {
   return (
     <tr>
       <td>{num}</td>
@@ -8,6 +8,7 @@ const SongListEntry = ({ onPlayClick, song, num }) => {
       <td>{song.album}</td>
       <td>{song.title}</td>
       <td onClick={() => onPlayClick(song)}>Play</td>
+      <td onClick={() => onAddClick(song)}>Add to playlist</td>
     </tr>
   );
 };

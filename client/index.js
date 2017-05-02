@@ -11,6 +11,7 @@ class App extends Component {
     this.onSongClick = this.onSongClick.bind(this);
     this.onRemoveClick = this.onRemoveClick.bind(this);
     this.onPlaylistClick = this.onPlaylistClick.bind(this);
+    this.onAddClick = this.onAddClick.bind(this);
 
     this.state = {
       songs: [],
@@ -51,6 +52,16 @@ class App extends Component {
     this.setState({ currentPlaylist: playlist.songs });
   }
 
+  onAddClick(song) {
+    const songIds = this.state.currentPlaylist.map(song => song._id);
+    if (songIds.indexOf(song._id) === -1) {
+      const newPlaylist = [...this.state.currentPlaylist, song];
+      this.setState({
+        currentPlaylist: newPlaylist
+      });
+    }
+  }
+
   render() {
     return (
       <div>
@@ -66,6 +77,7 @@ class App extends Component {
         </Playlists>
         <SongList
           onPlayClick={this.onSongClick}
+          onAddClick={this.onAddClick}
           songs={this.state.songs}>
           Library
         </SongList>
