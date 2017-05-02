@@ -1,7 +1,7 @@
 import React from 'react';
 import Playlist from './playlist';
 
-const Playlists = ({ children, playlists, currentPlaylist, onPlayClick }) => {
+const Playlists = ({ children, playlists, currentPlaylist, onPlayClick, onRemoveClick }) => {
   return (
     <div>
       <h2>{ children }</h2>
@@ -17,6 +17,7 @@ const Playlists = ({ children, playlists, currentPlaylist, onPlayClick }) => {
       </ul>
       <Playlist
         onPlayClick={onPlayClick}
+        onRemoveClick={onRemoveClick}
         songs={currentPlaylist} />
     </div>
   );

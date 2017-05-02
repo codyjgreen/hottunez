@@ -1,8 +1,7 @@
 import React from 'react';
 import PlaylistEntry from './playlist-entry';
 
-const Playlist = ({ children, songs, onPlayClick }) => {
-  console.log(songs)
+const Playlist = ({ children, songs, onPlayClick, onRemoveClick }) => {
   return (
     <div>
       <h3>{children}</h3>
@@ -20,6 +19,7 @@ const Playlist = ({ children, songs, onPlayClick }) => {
                   key={song._id}
                   num={i + 1}
                   onPlayClick={onPlayClick}
+                  onRemoveClick={onRemoveClick}
                   song={song} />
               );
             })

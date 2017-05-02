@@ -9,6 +9,7 @@ class App extends Component {
     super(props);
 
     this.onSongClick = this.onSongClick.bind(this);
+    this.onRemoveClick = this.onRemoveClick.bind(this);
 
     this.state = {
       songs: [],
@@ -38,6 +39,13 @@ class App extends Component {
     this.setState({ currentSong: song });
   }
 
+  onRemoveClick(songToBeRemoved) {
+    const newPlaylist = this.state.currentPlaylist.filter(song => song !== songToBeRemoved);
+    this.setState({
+      currentPlaylist: newPlaylist
+    });
+  }
+
   render() {
     return (
       <div>
@@ -45,6 +53,7 @@ class App extends Component {
         <AudioPlayer song={this.state.currentSong} />
         <Playlists
           onPlayClick={this.onSongClick}
+          onRemoveClick={this.onRemoveClick}
           playlists={this.state.playlists}
           currentPlaylist={this.state.currentPlaylist}>
           Playlists
