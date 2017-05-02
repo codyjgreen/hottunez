@@ -21,7 +21,9 @@ app.delete('/api/songs/:id', handler.deleteSong);
 
 app.get('/api/playlists', handler.fetchPlaylists);
 app.post('/api/playlists', handler.createPlaylist);
+app.get('/api/playlists/:id', handler.fetchPlaylist);
 app.put('/api/playlists/:id', handler.updatePlaylist);
+app.delete('/api/playlists/:id', handler.deletePlaylist);
 
 app.get('/*', handler.render404);
 
