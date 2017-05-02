@@ -1,5 +1,6 @@
 import React from 'react';
 import Playlist from './playlist';
+import CreatePlaylist from './create-playlist';
 
 const Playlists = ({
     children,
@@ -10,11 +11,13 @@ const Playlists = ({
     onPlaylistClick,
     isPlaylistSaved,
     onSaveClick,
-    onDeleteClick
+    onDeleteClick,
+    onPlaylistAdd
 }) => {
   return (
     <div>
       <h2>{ children }</h2>
+      <CreatePlaylist onPlaylistAdd={onPlaylistAdd} />
       <ul>
         { playlists.map(playlist => {
             return (
