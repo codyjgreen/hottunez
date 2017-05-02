@@ -14,7 +14,7 @@ class App extends Component {
       songs: [],
       currentSong: {},
       playlists: [],
-      currentPlaylist: {}
+      currentPlaylist: []
     };
   }
 
@@ -30,6 +30,7 @@ class App extends Component {
       .then(res => res.json())
       .then(res => {
         this.setState({ playlists: res.results });
+        this.setState({ currentPlaylist: this.state.playlists[0].songs });
       });
   }
 
@@ -42,7 +43,9 @@ class App extends Component {
       <div>
         <h1>hotTUNEZ</h1>
         <AudioPlayer song={this.state.currentSong} />
-        <Playlists playlists={this.state.playlists}>
+        <Playlists
+          playlists={this.state.playlists}
+          currentPlaylist={this.state.currentPlaylist}>
           Playlists
         </Playlists>
         <SongList
