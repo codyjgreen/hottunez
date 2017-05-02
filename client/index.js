@@ -44,6 +44,7 @@ class App extends Component {
         <h1>hotTUNEZ</h1>
         <AudioPlayer song={this.state.currentSong} />
         <Playlists
+          onPlayClick={this.onSongClick}
           playlists={this.state.playlists}
           currentPlaylist={this.state.currentPlaylist}>
           Playlists
