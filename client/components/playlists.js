@@ -40,7 +40,7 @@ const Playlists = ({
         </button>
       }
       {
-        (currentPlaylist.songs.length !== 0) &&
+        (currentPlaylist.name !== undefined) &&
         <button onClick={() => onDeleteClick(currentPlaylist)}>
           Delete playlist
         </button>

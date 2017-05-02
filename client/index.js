@@ -62,13 +62,15 @@ class App extends Component {
   }
 
   onAddClick(song) {
-    const songIds = this.state.currentPlaylist.songs.map(song => song._id);
-    if (songIds.indexOf(song._id) === -1) {
-      const songs = [...this.state.currentPlaylist.songs, song];
-      this.setState({
-        currentPlaylist: { ...this.state.currentPlaylist, songs},
-        isPlaylistSaved: false
-      });
+    if (this.state.currentPlaylist.name !== undefined) {
+      const songIds = this.state.currentPlaylist.songs.map(song => song._id);
+      if (songIds.indexOf(song._id) === -1) {
+        const songs = [...this.state.currentPlaylist.songs, song];
+        this.setState({
+          currentPlaylist: { ...this.state.currentPlaylist, songs},
+          isPlaylistSaved: false
+        });
+      }
     }
   }
 
@@ -93,7 +95,10 @@ class App extends Component {
       .then(res => res.json())
       .then(res => {
         this.setState({ playlists: res.results });
-        this.setState({ currentPlaylist: {songs: []} });
+        this.setState({
+          currentPlaylist: {songs: []},
+          isPlaylistSaved: true
+        });
       });
   }
 

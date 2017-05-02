@@ -20,6 +20,7 @@ class CreatePlaylist extends Component {
     event.preventDefault();
     if (this.state.value.trim().length !== 0) {
       this.props.onPlaylistAdd(this.state.value.trim());
+      this.setState({ value: '' });
     }
   }
 
