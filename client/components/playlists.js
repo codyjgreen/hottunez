@@ -12,7 +12,8 @@ const Playlists = ({
     isPlaylistSaved,
     onSaveClick,
     onDeleteClick,
-    onPlaylistAdd
+    onPlaylistAdd,
+    currentSong
 }) => {
   return (
     <div>
@@ -39,7 +40,8 @@ const Playlists = ({
       <Playlist
         onPlayClick={onPlayClick}
         onRemoveClick={onRemoveClick}
-        playlist={currentPlaylist} />
+        playlist={currentPlaylist}
+        currentSong={currentSong} />
       { (!isPlaylistSaved) &&
         <button onClick={() => onSaveClick(currentPlaylist)}>
           Save playlist

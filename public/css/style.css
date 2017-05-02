@@ -11,3 +11,8 @@ body {
   font-weight: bold;
   color: blue;
 }
+
+.selected-song {
+  font-weight: bold;
+  color: green;
+}

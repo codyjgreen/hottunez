@@ -134,7 +134,8 @@ class App extends Component {
           onPlaylistAdd={this.onPlaylistAdd}
           playlists={this.state.playlists}
           currentPlaylist={this.state.currentPlaylist}
-          isPlaylistSaved={this.state.isPlaylistSaved}>
+          isPlaylistSaved={this.state.isPlaylistSaved}
+          currentSong={this.state.currentSong}>
           Playlists
         </Playlists>
         <SongList

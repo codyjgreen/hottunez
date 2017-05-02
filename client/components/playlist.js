@@ -1,7 +1,7 @@
 import React from 'react';
 import PlaylistEntry from './playlist-entry';
 
-const Playlist = ({ children, playlist, onPlayClick, onRemoveClick }) => {
+const Playlist = ({ children, playlist, onPlayClick, onRemoveClick, currentSong }) => {
   return (
     <div>
       <h3>{children}</h3>
@@ -20,7 +20,8 @@ const Playlist = ({ children, playlist, onPlayClick, onRemoveClick }) => {
                   num={i + 1}
                   onPlayClick={onPlayClick}
                   onRemoveClick={onRemoveClick}
-                  song={song} />
+                  song={song}
+                  currentSong={currentSong} />
               );
             })
           }
