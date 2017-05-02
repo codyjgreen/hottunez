@@ -12,12 +12,13 @@ class App extends Component {
     this.onRemoveClick = this.onRemoveClick.bind(this);
     this.onPlaylistClick = this.onPlaylistClick.bind(this);
     this.onAddClick = this.onAddClick.bind(this);
+    this.onSaveClick = this.onSaveClick.bind(this);
 
     this.state = {
       songs: [],
       currentSong: {},
       playlists: [],
-      currentPlaylist: [],
+      currentPlaylist: {songs: []},
       isPlaylistSaved: true
     };
   }
@@ -34,7 +35,7 @@ class App extends Component {
       .then(res => res.json())
       .then(res => {
         this.setState({ playlists: res.results });
-        this.setState({ currentPlaylist: this.state.playlists[0].songs });
+        this.setState({ currentPlaylist: this.state.playlists[0] });
       });
   }
 
@@ -43,29 +44,43 @@ class App extends Component {
   }
 
   onRemoveClick(songToBeRemoved) {
-    const newPlaylist = this.state.currentPlaylist.filter(song => song !== songToBeRemoved);
+    const songs = this.state.currentPlaylist.songs.filter(song => song !== songToBeRemoved);
     this.setState({
-      currentPlaylist: newPlaylist,
+      currentPlaylist: { ...this.state.currentPlaylist, songs },
       isPlaylistSaved: false
     });
   }
 
   onPlaylistClick(playlist) {
     this.setState({
-      currentPlaylist: playlist.songs,
+      currentPlaylist: playlist,
       isPlaylistSaved: true
     });
   }
 
   onAddClick(song) {
-    const songIds = this.state.currentPlaylist.map(song => song._id);
+    const songIds = this.state.currentPlaylist.songs.map(song => song._id);
     if (songIds.indexOf(song._id) === -1) {
-      const newPlaylist = [...this.state.currentPlaylist, song];
+      const songs = [...this.state.currentPlaylist.songs, song];
       this.setState({
-        currentPlaylist: newPlaylist,
+        currentPlaylist: { ...this.state.currentPlaylist, songs},
         isPlaylistSaved: false
       });
     }
+  }
+
+  onSaveClick(playlist) {
+    fetch(`http://localhost:8080/api/playlists/${playlist._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({songs: playlist.songs})
+    }).then(res => res.json())
+      .then(() => this.setState({ isPlaylistSaved: true }))
+      .then(() => fetch('http://localhost:8080/api/playlists'))
+      .then(res => res.json())
+      .then(res => this.setState({ playlists: res.results }));
   }
 
   render() {
@@ -77,6 +92,7 @@ class App extends Component {
           onPlayClick={this.onSongClick}
           onRemoveClick={this.onRemoveClick}
           onPlaylistClick={this.onPlaylistClick}
+          onSaveClick={this.onSaveClick}
           playlists={this.state.playlists}
           currentPlaylist={this.state.currentPlaylist}
           isPlaylistSaved={this.state.isPlaylistSaved}>

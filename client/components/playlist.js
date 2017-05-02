@@ -1,7 +1,7 @@
 import React from 'react';
 import PlaylistEntry from './playlist-entry';
 
-const Playlist = ({ children, songs, onPlayClick, onRemoveClick }) => {
+const Playlist = ({ children, playlist, onPlayClick, onRemoveClick }) => {
   return (
     <div>
       <h3>{children}</h3>
@@ -13,7 +13,7 @@ const Playlist = ({ children, songs, onPlayClick, onRemoveClick }) => {
             <th>Album</th>
             <th>Title</th>
           </tr>
-          { songs.map((song, i) => {
+          { playlist.songs.map((song, i) => {
               return (
                 <PlaylistEntry
                   key={song._id}
