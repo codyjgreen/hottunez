@@ -201,7 +201,7 @@ class App extends Component {
           ? <LoggedIn lock={this.lock} idToken={this.state.idToken} />
         : <Login lock={this.lock} />
         }
-        <h1>hotTUNEZ</h1>
+        <h1 className="app-title">hotTUNEZ</h1>
         <SongStatus song={this.state.currentSong} />
         <AudioPlayer
           song={this.state.currentSong}

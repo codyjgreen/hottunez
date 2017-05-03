@@ -4,19 +4,37 @@ html, body {
 }
 
 body {
-  background-color: #ccc;
+  background-color: #fafafa;
+  padding-top: 40px;
 }
 
-.selected-playlist {
+.playlist-title, .selected-playlist {
   font-weight: bold;
-  color: blue;
+  color: #16c3b0;
 }
 
-.selected-song {
+.library-title, .selected-song {
   font-weight: bold;
-  color: green;
+  color: #147a94;
+}
+
+.app-title {
+  font-weight: bold;
+  color: #7b00e4;
+}
+
+#app {
+  width: 50%;
+  min-width: 640px;
+  margin: 0 auto;
+  padding-bottom: 60px;
 }
 
 audio {
-  width: 400px;
+  width: 100%;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+  background-color: #f1f1f1;
 }

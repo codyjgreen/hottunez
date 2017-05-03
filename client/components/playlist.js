@@ -5,13 +5,15 @@ const Playlist = ({ children, playlist, onPlayClick, onRemoveClick, currentSong 
   return (
     <div>
       <h3>{children}</h3>
-      <table>
+      <table className="table table-striped">
         <tbody>
           <tr>
             <th>#</th>
             <th>Arist</th>
             <th>Album</th>
             <th>Title</th>
+            <th></th>
+            <th></th>
           </tr>
           { playlist.songs.map((song, i) => {
               return (

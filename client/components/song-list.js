@@ -21,19 +21,22 @@ class SongList extends Component {
 
     return (
       <div>
-        <h2>{ children }</h2>
+        <h2 className="library-title">{ children }</h2>
         <input
+          className="form-control"
           type="text"
           value={this.state.query}
           onChange={this.handleChange}
           placeholder="filter hotness" />
-        <table>
+        <table className="table table-striped">
           <tbody>
             <tr>
               <th>#</th>
               <th>Artist</th>
               <th>Album</th>
               <th>Title</th>
+              <th></th>
+              <th></th>
             </tr>
             { songs.filter(song => {
                 const songInfo = [

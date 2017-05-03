@@ -23,11 +23,11 @@ const Playlists = ({
 }) => {
   return (
     <div>
-      <h2>{ children }</h2>
+      <h2 className="playlist-title">{ children }</h2>
       { (isLoggedIn)
         && <CreatePlaylist onPlaylistAdd={onPlaylistAdd} />
       }
-      <ul>
+      <ul className="list-inline">
         { playlists.map(playlist => {
             let cssClasses = '';
             if (playlist._id === currentPlaylist._id) {
@@ -39,7 +39,7 @@ const Playlists = ({
                 key={playlist._id}
                 className={cssClasses}
                 onClick={() => onPlaylistClick(playlist)}>
-                {playlist.name}
+                <h4>{playlist.name}</h4>
               </li>
             );
           })
@@ -66,13 +66,17 @@ const Playlists = ({
         playlist={currentPlaylist}
         currentSong={currentSong} />
       { (isLoggedIn && !isPlaylistSaved) &&
-        <button onClick={() => onSaveClick(currentPlaylist)}>
+        <button
+          className="btn btn-primary"
+          onClick={() => onSaveClick(currentPlaylist)}>
           Save playlist
         </button>
       }
       {
         (isLoggedIn && currentPlaylist.name !== undefined) &&
-        <button onClick={() => onDeleteClick(currentPlaylist)}>
+        <button
+          className="btn btn-danger"
+          onClick={() => onDeleteClick(currentPlaylist)}>
           Delete playlist
         </button>
       }
