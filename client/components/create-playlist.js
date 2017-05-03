@@ -26,15 +26,15 @@ class CreatePlaylist extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="form-inline">
         <label>
-          Add a playlist:
           <input
+            className="form-control"
             type="text"
             onChange={this.handleChange}
             value={this.state.value}
-            placeholder="name" />
-          <button>Add</button>
+            placeholder="Add a playlist" />
+          <button className="form-control">Add</button>
         </label>
       </form>
     );

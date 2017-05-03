@@ -8,7 +8,7 @@ const SongStatus = ({ song }) => {
   }
 
   return (
-    <h2>{ `${song.artist} - ${song.title}` }</h2>
+    <h2 className="selected-song">{ `${song.artist} - ${song.title}` }</h2>
   );
 };
 

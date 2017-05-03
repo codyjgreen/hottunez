@@ -12,8 +12,12 @@ const PlaylistEntry = ({ onPlayClick, onRemoveClick, song, num, currentSong }) =
       <td>{song.artist}</td>
       <td>{song.album}</td>
       <td>{song.title}</td>
-      <td onClick={() => onPlayClick(song)}>Play</td>
-      <td onClick={() => onRemoveClick(song)}>Remove</td>
+      <td onClick={() => onPlayClick(song)}>
+        <span className="glyphicon glyphicon-play" aria-hidden="true"></span>
+      </td>
+      <td onClick={() => onRemoveClick(song)}>
+        <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
+      </td>
     </tr>
   );
 };

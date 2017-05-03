@@ -1,2 +1,4 @@
 node_modules
 public/dist
+config/auth.js
+.env
