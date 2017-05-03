@@ -18,12 +18,15 @@ const Playlists = ({
     onDeleteClick,
     onPlaylistAdd,
     isAutoplay,
+    isLoggedIn,
     currentSong
 }) => {
   return (
     <div>
       <h2>{ children }</h2>
-      <CreatePlaylist onPlaylistAdd={onPlaylistAdd} />
+      { (isLoggedIn)
+        && <CreatePlaylist onPlaylistAdd={onPlaylistAdd} />
+      }
       <ul>
         { playlists.map(playlist => {
             let cssClasses = '';
@@ -62,13 +65,13 @@ const Playlists = ({
         onRemoveClick={onRemoveClick}
         playlist={currentPlaylist}
         currentSong={currentSong} />
-      { (!isPlaylistSaved) &&
+      { (isLoggedIn && !isPlaylistSaved) &&
         <button onClick={() => onSaveClick(currentPlaylist)}>
           Save playlist
         </button>
       }
       {
-        (currentPlaylist.name !== undefined) &&
+        (isLoggedIn && currentPlaylist.name !== undefined) &&
         <button onClick={() => onDeleteClick(currentPlaylist)}>
           Delete playlist
         </button>

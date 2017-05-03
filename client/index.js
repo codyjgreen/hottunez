@@ -4,6 +4,9 @@ import AudioPlayer from './components/audio-player';
 import Playlists from './components/playlists';
 import SongList from './components/song-list';
 import SongStatus from './components/song-status';
+import Login from './components/login';
+import LoggedIn from './components/logged-in';
+import Auth0 from '../config/auth';
 
 class App extends Component {
   constructor(props) {
@@ -29,6 +32,37 @@ class App extends Component {
       isAutoplay: true,
       isShuffle: false
     };
+  }
+
+  componentWillMount() {
+    this.lock = new Auth0Lock(Auth0.CLIENT_ID, Auth0.CLIENT_DOMAIN);
+    this.setState({idToken: this.getIdToken()});
+  }
+
+  getIdToken() {
+    var idToken = localStorage.getItem('id_token');
+    var authHash = this.lock.parseHash(window.location.hash);
+
+    if (!idToken && authHash) {
+      if (authHash.id_token) {
+        idToken = authHash.id_token;
+        localStorage.setItem('id_token', authHash.id_token);
+      }
+      if (authHash.error) {
+        console.log('Error signing in', authHash);
+      }
+    }
+    return idToken;
+  }
+
+  setFetchOptions(method) {
+    return {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('id_token')
+      },
+      method: method,
+      cache: false
+    }
   }
 
   componentDidMount() {
@@ -83,7 +117,8 @@ class App extends Component {
     fetch(`http://localhost:8080/api/playlists/${playlist._id}`, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('id_token')
       },
       body: JSON.stringify({songs: playlist.songs})
     }).then(res => res.json())
@@ -95,7 +130,10 @@ class App extends Component {
 
   onDeleteClick(playlist) {
     fetch(`http://localhost:8080/api/playlists/${playlist._id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('id_token')
+      }
     }).then(() => fetch('http://localhost:8080/api/playlists'))
       .then(res => res.json())
       .then(res => {
@@ -111,7 +149,8 @@ class App extends Component {
     fetch('http://localhost:8080/api/playlists', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('id_token')
       },
       body: JSON.stringify({
         name: name,
@@ -158,6 +197,10 @@ class App extends Component {
   render() {
     return (
       <div>
+        { (this.state.idToken)
+          ? <LoggedIn lock={this.lock} idToken={this.state.idToken} />
+        : <Login lock={this.lock} />
+        }
         <h1>hotTUNEZ</h1>
         <SongStatus song={this.state.currentSong} />
         <AudioPlayer
@@ -177,6 +220,7 @@ class App extends Component {
           isPlaylistSaved={this.state.isPlaylistSaved}
           isAutoplay={this.state.isAutoplay}
           isShuffle={this.state.isShuffle}
+          isLoggedIn={this.state.idToken}
           currentSong={this.state.currentSong}>
           Playlists
         </Playlists>
