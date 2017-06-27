@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
-var url = "mongodb://localhost/mvp";
+var url = process.env.DATABASE_URL || 'mongodb://localhost/hottunez';
 mongoose.connect(url);
 
 var db = mongoose.connection;
