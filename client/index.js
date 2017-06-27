@@ -32,14 +32,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/api/songs')
+    fetch('/api/songs')
       .then(res => res.json())
       .then(res => {
         this.setState({ songs: res.results });
         // this.setState({ currentSong: this.state.songs[0] });
       });
 
-    fetch('http://localhost:8080/api/playlists')
+    fetch('/api/playlists')
       .then(res => res.json())
       .then(res => {
         this.setState({ playlists: res.results });
@@ -80,7 +80,7 @@ class App extends Component {
   }
 
   onSaveClick(playlist) {
-    fetch(`http://localhost:8080/api/playlists/${playlist._id}`, {
+    fetch(`/api/playlists/${playlist._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -88,15 +88,15 @@ class App extends Component {
       body: JSON.stringify({songs: playlist.songs})
     }).then(res => res.json())
       .then(() => this.setState({ isPlaylistSaved: true }))
-      .then(() => fetch('http://localhost:8080/api/playlists'))
+      .then(() => fetch('/api/playlists'))
       .then(res => res.json())
       .then(res => this.setState({ playlists: res.results }));
   }
 
   onDeleteClick(playlist) {
-    fetch(`http://localhost:8080/api/playlists/${playlist._id}`, {
+    fetch(`/api/playlists/${playlist._id}`, {
       method: 'DELETE'
-    }).then(() => fetch('http://localhost:8080/api/playlists'))
+    }).then(() => fetch('/api/playlists'))
       .then(res => res.json())
       .then(res => {
         this.setState({ playlists: res.results });
@@ -108,7 +108,7 @@ class App extends Component {
   }
 
   onPlaylistAdd(name) {
-    fetch('http://localhost:8080/api/playlists', {
+    fetch('/api/playlists', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -119,7 +119,7 @@ class App extends Component {
       })
     }).then(res => res.json())
       .then(playlist => this.setState({ currentPlaylist: playlist }))
-      .then(() => fetch('http://localhost:8080/api/playlists'))
+      .then(() => fetch('/api/playlists'))
       .then(res => res.json())
       .then(res => this.setState({ playlists: res.results }));
   }
