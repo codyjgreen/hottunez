@@ -7,7 +7,8 @@
     "start": "node server.js",
     "start:watch": "webpack --watch --progress --colors & nodemon server.js",
     "build": "webpack -p",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "npm install --only=dev && npm run build"
   },
   "keywords": [],
   "author": "",
